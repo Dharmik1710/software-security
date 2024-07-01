@@ -1,0 +1,7 @@
+while true; do
+  file=$(find "/tmp" -type f -name "safepassword_*")
+  if [ -f "$file" ]; then
+    cat "$file"
+    exit 0
+  fi
+done
