@@ -1,52 +1,73 @@
-Some labs and topics covered
+# Some Labs and Topics Covered
 
+- **Setuid and effective user ID**
+- **File access attacks**
+  - Path Traversals
+  - TOCTOU
+  - File handler reuse
+- **Memory corruption attacks**
+  - Stack corruption
+  - Heap corruption
+  - Format string exploitation
+  - JIT compilation corruptions
+  - Non-terminal String overflow
+  - Index overflow
+- **ASLR Exploitation**
+- **Bypassing stack canaries**
+  - Using forking server
+- **Overwriting Global Offset Tables (GOT) and mitigation**
+- **NOP sleds**
+- **Memory leaks**
+  - `printf`
+- **Return oriented programming (ROP chain attacks)**
+- **Buffer overflows**
+- **Heap exploitation**
+- **Use after free attacks**
+- **SECCOMP**
+- **Address sanitizer (ASAN)**
+  - Prevent use after free attacks
+- **Automated analysis**
+  - Dynamic analysis
+    - Fuzzing
+  - Static analysis
+    - Control-flow graph
+    - Data-flow analysis
+    - Value-set analysis
+  - Symbolic execution
+    - Forward SE
+    - Under-constrained SE
+- **American Fuzzy Lop (AFL and AFL++)**
+  - Random fuzzing
+  - Grammar based fuzzing
+  - Graybox fuzzing
+- **Angr**
+  - Symbolic execution
+- **Rust**
+  - Ownership and functions
+  - Mutable and immutable references
+  - Rust Security
+- **Android**
+  - Compilation
+  - App reverse engineering
+  - App dynamic analysis
+    - Frida Framework
+  - App execution
+  - Permission groups and Permission enforcement
+  - Binder
+  - App/System interaction
+  - Security principle
+    - Google rule of 2
+      - Code with untrustworthy input
+      - Code which runs with no sandbox
+      - Code written in unsafe language
+  - Execution environments - contexts
+    - Isolated Processes
+    - Normal Apps
+    - System Apps
+    - System Services
+    - Linux kernel
+    - Bootloader
+    - TrustZone (TEE)
+    - Secure Element (SE)
 
-Setuid and effective user ID
-File access attacks - Path Traversals, TOCTOU, file handler reuse
-Memory corruption attacks - Stack corruption, heap corruption, format string exploitation, JIT compilation corruptions
-	Non-terminal String overflow
-	Index overflow
-ASLR Exploitation
-Bypassing stack canaries - using forking server
-Overwriting Global Offset Tables(GOT) and mitigation
-NOP sleds
-Memory leaks - printf
-Return oriented programming(ROP chain attacks)
-Buffer overflows
-Heap exploitation
-Use after free attacks
-SECCOMP
-Address sanitizer(ASAN) - prevent use after free attacks
-Automated analysis - 
-	Dynamic analysis - fuzzing, 
-	Static analysis - control-flow graph, Data-flow analysis, value-set analysis
-	Symbolic execution - Forward SE, Under-constrained SE
-American Fuzzy Lop(AFL and AFL++) - Random fuzzing, Grammar based fuzzing, graybox fuzzing
-Angr - symbollic execution
-Rust 
-	Ownership and functions
-	Mutable and immutable references
-	Rust Security
-Android
-	Compilation
-	App reverse engineering
-	App dynamic analysis - Frida Framework
-	App execution
-	Permission groups and Permission enforcement
-	Binder
-	App/System interaction
-	Security principle - google rule of 2
-		code with untrustworthy input
-		code which runs with no sandbox
-		code written in unsafe language
-	Execution environments - contexts
-		Isolated Processes
-		Normal Apps
-		System Apps
-		System Services
-		Linux kernel
-		Bootloader
-		TrustZone(TEE)
-		Secure Element(SE)
-
-Credits - Antonio Bianchi, Software Security(CS527) (Depart of Computer Science, Purdue University)
+**Credits** - Antonio Bianchi, Software Security (CS527) (Department of Computer Science, Purdue University)
